@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useRef, useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [isCircle, setIsCircle] = useState(true);
+  const nameInput = useRef(null);
+
+  const changeShape = () => {
+    setIsCircle(!isCircle);
+  }
+
+  const clearInput = () => {
+    nameInput.current.value = "";
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={isCircle ? "circle" : "square"}></div>
+      <button className="shape" onClick={changeShape}>Change Shape</button>
+
+      <input type="text" placeholder="What your name?" ref={nameInput}/>
+      <button onClick={clearInput}>submit</button>
     </div>
   );
 }
